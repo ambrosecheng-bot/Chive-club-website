@@ -277,6 +277,51 @@
 
     /*
       ============================================================
+      區塊：Farm to Table 聚會花絮（真實活動照片）
+      ============================================================
+    */
+    /*
+      活動相片區：
+      Mobile-first — 手機上兩張相片上下疊成一欄，
+      桌面版（≥ 720px）才並排成兩欄。
+    */
+    .event-gallery {
+      display: grid;
+      grid-template-columns: 1fr;   /* 手機：單欄 */
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto 28px;
+    }
+    @media (min-width: 720px) {
+      .event-gallery { grid-template-columns: 1fr 1fr; } /* 桌面：兩欄並排 */
+    }
+    /* 每一張活動相片 */
+    .event-photo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;            /* 兩張相片高度一致、不變形 */
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+      background-color: #d9cdba;     /* 圖片載入前的底色 */
+    }
+    /* 場地的感謝留言卡 */
+    .event-message {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .event-message .story-quote { font-style: italic; }
+    /* 活動資訊（場地・地點・日期） */
+    .event-meta {
+      text-align: center;
+      color: var(--burnt-orange);
+      font-weight: 700;
+      margin-top: 14px;
+    }
+
+    /*
+      ============================================================
       6. 免費 5 天 Email 課程區
       ============================================================
     */
@@ -578,33 +623,82 @@
 
       <div class="stories-grid">
 
-        <!-- 故事卡一 -->
+        <!-- 故事卡一（Cammy 的真實會員故事與葡萄照片） -->
         <div class="card">
-          <!-- 👉 請換成真實會員／收成照片 -->
-          <img class="story-photo" src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&w=600&q=80" alt="會員收成照片（請替換成真實照片）" />
-          <p class="story-quote">「剛到修咸頓時人生路不熟，是俱樂部的朋友帶我認識這片土地。第一次收成番茄那天，我哭了。」</p>
-          <!-- 👉 請換成真實署名 -->
-          <p class="story-author">陳太・修咸頓 Southampton</p>
+          <!--
+            Cammy 分享的葡萄照片。
+            👉 請把她那張相片存成 images/cammy-grapes.jpg（放進 images 資料夾），
+               網站就會自動顯示。詳見 images/README.txt。
+          -->
+          <img class="story-photo" src="images/cammy-grapes.jpg" alt="Cammy 種的葡萄，今年結了三串" />
+          <p class="story-quote">「四年前貪便宜買了這棵大約 20cm 高的葡萄苗，是我第一次種葡萄。幾年間葉不多、枝也不壯，有時看著都覺得它離死不遠。後來上網查資料、聽朋友意見，做了些疏枝、轉盆等改動，這兩年漸入佳境，現在已經高過我了！上年結了 0.5cm 的小果，摘來試竟然非常清甜；今年結了三串、粒粒更大，還在成長期，好期待今年的收成 😋」</p>
+          <p class="story-author">Cammy・會員分享</p>
         </div>
 
-        <!-- 故事卡二 -->
+        <!-- 故事卡二（Blue 的真實會員故事與收成照片） -->
         <div class="card">
-          <!-- 👉 請換成真實會員／收成照片 -->
-          <img class="story-photo" src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=600&q=80" alt="會員收成照片（請替換成真實照片）" />
-          <p class="story-quote">「本來以為自己一定種死，結果跟著大家一步一步，居然種出一整盤生菜。原來我做得到。」</p>
-          <!-- 👉 請換成真實署名 -->
-          <p class="story-author">阿麗・曼徹斯特 Manchester</p>
+          <!--
+            Blue 分享的收成照片。
+            👉 請把相片存成 images/blue-harvest.jpg（放進 images 資料夾），
+               網站就會自動顯示。詳見 images/README.txt。
+          -->
+          <img class="story-photo" src="images/blue-harvest.jpg" alt="Blue 種的一大盤青菜收成" />
+          <p class="story-quote">「第三年種菜，收成越來越多了 🌿」</p>
+          <p class="story-author">Blue・會員分享</p>
         </div>
 
-        <!-- 故事卡三 -->
+        <!-- 故事卡三（Dury 的真實會員故事與蕃茄照片） -->
         <div class="card">
-          <!-- 👉 請換成真實會員／收成照片 -->
-          <img class="story-photo" src="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&w=600&q=80" alt="會員收成照片（請替換成真實照片）" />
-          <p class="story-quote">「最珍貴的不是那些菜，而是一班一起吃飯、講廣東話、互相照應的朋友。這裏有家的感覺。」</p>
-          <!-- 👉 請換成真實署名 -->
-          <p class="story-author">Kelvin・伯明翰 Birmingham</p>
+          <!--
+            Dury 分享的蕃茄照片。
+            👉 請把相片存成 images/dury-tomato.jpg（放進 images 資料夾），
+               網站就會自動顯示。詳見 images/README.txt。
+          -->
+          <img class="story-photo" src="images/dury-tomato.jpg" alt="Dury 種的蕃茄，正在長大中" />
+          <p class="story-quote">「蕃茄長大中⋯⋯🍅😆💪🏻」</p>
+          <p class="story-author">Dury・伯明翰 Birmingham</p>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!--
+    ============================================================
+    區塊 3.5：Farm to Table 聚會花絮（真實活動）
+    ------------------------------------------------------------
+    這是俱樂部 2026 年 6 月 18 日在 Cafe Lamma'z（Fareham）舉行的
+    「從土地到餐桌」聚會合照，以及場地的感謝留言。
+    ============================================================
+  -->
+  <section class="event">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="eyebrow">聚會花絮</span>
+        <h2 class="section-title">從土地到餐桌，我們真的做到了</h2>
+      </div>
+      <p class="section-intro">一枱餸、一班人、一面自己寫的招牌 —— 這就是韭菜俱樂部。</p>
+
+      <!--
+        兩張聚會相片（室內大合照 + 店外門口合照）。
+        👉 請把相片分別存成 images 資料夾內的：
+             farm-to-table-june2026.jpg    （室內圍枱大合照）
+             farm-to-table-june2026-2.jpg  （Cafe Lamma'z 店外門口合照）
+           網站就會自動顯示。詳見 images/README.txt。
+      -->
+      <div class="event-gallery">
+        <img class="event-photo"
+             src="images/farm-to-table-june2026.jpg"
+             alt="韭菜俱樂部 Southampton Branch 於 Cafe Lamma'z 圍枱聚餐的合照" />
+        <img class="event-photo"
+             src="images/farm-to-table-june2026-2.jpg"
+             alt="韭菜俱樂部成員在 Cafe Lamma'z 店外門口的大合照" />
+      </div>
+
+      <!-- 場地 Cafe Lamma'z 的感謝留言 -->
+      <div class="event-message">
+        <p class="story-quote">「感謝『韮菜俱樂部』選擇 Cafe Lamma'z 作為今次聚會的場地！很高興能夠接待大家，與各位一同分享美食和歡樂時光。感謝大家的支持和蒞臨，希望大家都度過了一個愉快的聚會，期待不久將來再次歡迎大家到來！🥰☕️🍰」</p>
+        <p class="event-meta">Cafe Lamma'z・Fareham ・ 2026 年 6 月 18 日 Farm to Table 聚會</p>
       </div>
     </div>
   </section>
