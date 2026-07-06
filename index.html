@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  韭菜俱樂部 The Chive Club — 單頁招募網站
+  ============================================================
+  這是一個「self-contained」（自給自足）的網頁：
+  所有 CSS 樣式都寫在下面的 <style> 裏，
+  所有 JavaScript 都寫在最底的 <script> 裏，
+  所以你只要用瀏覽器打開這個 index.html 就能看到整個網站，
+  日後亦可以直接放上 GitHub Pages。
+
+  凡是需要你日後替換的地方（例如圖片、連結、Formspree 表單），
+  我都會用「👉 請在這裏替換」的中文註解清楚標示出來。
+  ============================================================
+-->
+<html lang="zh-Hant">
+<head>
+  <!-- charset：告訴瀏覽器用 UTF-8 編碼，中文才不會變亂碼 -->
+  <meta charset="UTF-8" />
+  <!-- viewport：讓網站在手機上正確縮放（responsive 的關鍵一行） -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 瀏覽器分頁標題 -->
+  <title>韭菜俱樂部 The Chive Club — 移居英國，一起種植、一起吃飯</title>
+  <!-- 給搜尋引擎與社交分享看的簡介 -->
+  <meta name="description" content="韭菜俱樂部 The Chive Club：一群散居英格蘭的香港人，一起種植、一起吃飯、一起在這片土地上札根。留下 Email，免費領取 5 天種菜課程。" />
+
+  <!--
+    載入 Google Fonts 字型：
+    - Noto Serif TC（思源宋體）→ 用於標題，帶書卷氣、溫暖
+    - Noto Sans TC（思源黑體）→ 用於內文，清晰易讀
+    這兩個 <link> 會從 Google 伺服器把字型下載下來。
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /*
+      ============================================================
+      1. CSS 變數（顏色主題）
+      ------------------------------------------------------------
+      這裏把整個網站用到的顏色集中定義，
+      日後想改色，只要改這裏就好，全站會一起變。
+      ============================================================
+    */
+    :root {
+      --forest-green: #2F5233;   /* 深森林綠：主色 */
+      --moss-green:   #6B8E5A;   /* 苔綠：輔助綠 */
+      --burnt-orange: #C1622D;   /* 焦橙：行動按鈕、重點 */
+      --warm-brown:   #7A5C3E;   /* 暖棕：文字、邊框 */
+      --cream:        #FBF7EF;   /* 米白：頁面背景 */
+      --card-bg:      #FFFFFF;   /* 卡片背景：純白 */
+      --text-dark:    #3A3226;   /* 內文深棕黑：比純黑柔和 */
+      --text-soft:    #6E6455;   /* 次要文字：淺一點的棕 */
+      --soft-shadow:  0 8px 24px rgba(47, 82, 51, 0.10); /* 柔和陰影 */
+      --radius:       18px;      /* 圓角大小：讓卡片親切不生硬 */
+    }
+
+    /*
+      ============================================================
+      2. 全域基本設定（reset + 排版）
+      ============================================================
+    */
+    * {
+      box-sizing: border-box; /* 讓 padding 不會撐大元素，排版更好算 */
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth; /* 點擊錨點連結時「平滑捲動」，不會硬跳 */
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif; /* 內文預設用黑體 */
+      color: var(--text-dark);
+      background-color: var(--cream);
+      line-height: 1.8;        /* 行距寬一點，中文更好讀 */
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 所有標題統一用宋體 */
+    h1, h2, h3 {
+      font-family: 'Noto Serif TC', serif;
+      color: var(--forest-green);
+      line-height: 1.4;
+    }
+
+    /* 一個共用的「內容容器」：限制最大寬度並置中，兩側留白 */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* 每個大區塊上下的留白（大量留白，呼吸感） */
+    section {
+      padding: 88px 0;
+    }
+
+    /* 區塊小標籤（綠色小字，放在大標題上方） */
+    .eyebrow {
+      display: inline-block;
+      color: var(--burnt-orange);
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+
+    /* 區塊主標題的共用樣式 */
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    /* 區塊置中的引言文字 */
+    .section-intro {
+      color: var(--text-soft);
+      max-width: 640px;
+      margin: 0 auto 48px;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+
+    /*
+      ============================================================
+      3. Hero 區（最上方的大banner）
+      ============================================================
+    */
+    .hero {
+      position: relative;
+      /*
+        👉 請在這裏替換背景圖片 👈
+        下面 url(...) 裏用的是 Unsplash 的 placeholder（暫代）後院種植照片。
+        日後換成你自己的照片：把 url() 裏的網址改成你的圖片路徑即可，
+        例如放一張 images/backyard.jpg，就寫成 url('images/backyard.jpg')。
+        前面那層 linear-gradient 是「深綠色半透明遮罩」，
+        令照片變暗一點，白色文字才看得清楚。
+      */
+      background-image:
+        linear-gradient(rgba(30, 50, 33, 0.62), rgba(30, 50, 33, 0.62)),
+        url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;     /* 圖片鋪滿整個區塊 */
+      background-position: center;
+      color: #fff;
+      text-align: center;
+      padding: 130px 0;
+    }
+
+    .hero h1 {
+      color: #fff;                /* Hero 標題用白色 */
+      font-size: 2.7rem;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 680px;
+      margin: 0 auto 36px;
+      color: #F3EEE4;
+    }
+
+    /*
+      主要行動按鈕（CTA = Call To Action）
+      這個 class 會重複用在多個「行動按鈕」上。
+    */
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--burnt-orange);
+      color: #fff;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 16px 34px;
+      border: none;
+      border-radius: 50px;        /* 完全圓角 → 藥丸型按鈕，親切 */
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(193, 98, 45, 0.35);
+      transition: transform 0.15s ease, background-color 0.2s ease;
+    }
+    /* 滑鼠移上去時：稍微放大 + 顏色加深（互動回饋） */
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background-color: #a8531f;
+    }
+
+    /*
+      ============================================================
+      4. 三大主軸（三張卡）
+      ============================================================
+    */
+    /*
+      grid：把卡片排成網格。
+      auto-fit + minmax → 電腦上一行三張，手機上會自動變成一張一行（responsive）。
+    */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    /* 卡片共用外觀：白底、圓角、柔和陰影 */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+      padding: 36px 30px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px rgba(47, 82, 51, 0.15);
+    }
+
+    /* 主軸卡片裏的 emoji icon */
+    .pillar-icon {
+      font-size: 2.6rem;
+      margin-bottom: 14px;
+    }
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+    /* 主軸的英文小標（放在中文標題下方） */
+    .card .en-label {
+      display: block;
+      color: var(--moss-green);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .card p {
+      color: var(--text-soft);
+    }
+
+    /*
+      ============================================================
+      5. 會員故事區（social proof）
+      ============================================================
+    */
+    .stories {
+      background-color: #F3ECE0; /* 這區用淺棕底，跟前後區塊區隔開 */
+    }
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    /* 故事卡片頂部的照片位 */
+    .story-photo {
+      width: 100%;
+      height: 200px;
+      border-radius: 14px;
+      object-fit: cover;         /* 圖片裁切填滿，不變形 */
+      margin-bottom: 18px;
+      background-color: #d9cdba; /* 圖片載入前的底色 */
+    }
+
+    /* 引言文字用斜體，帶感情 */
+    .story-quote {
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+    }
+
+    /* 署名（例：陳太・曼徹斯特） */
+    .story-author {
+      font-weight: 700;
+      color: var(--forest-green);
+    }
+
+    /*
+      ============================================================
+      6. 免費 5 天 Email 課程區
+      ============================================================
+    */
+    .course {
+      background-color: var(--forest-green); /* 深綠底，突出這個誘因 */
+      color: #fff;
+    }
+    .course h2 { color: #fff; }
+    .course .section-intro { color: #E4EAD9; }
+    .course .eyebrow { color: #F0B67F; }
+
+    /* 課程重點清單：用網格排成兩欄（手機自動變一欄） */
+    .course-benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 760px;
+      margin: 0 auto 40px;
+      list-style: none;          /* 去掉預設的圓點 */
+    }
+    .course-benefits li {
+      background: rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    /* 每個重點前面的綠色剔號 */
+    .course-benefits li::before {
+      content: "🌱";
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .course .btn-wrap {
+      text-align: center;
+    }
+
+    /*
+      ============================================================
+      7. 聯絡表 / Email 表格區
+      ============================================================
+    */
+    /*
+      這區分成左右兩欄：
+      左邊是文字說明，右邊是表格。
+      手機上會自動疊成上下一欄。
+    */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    /* 螢幕小於 820px（手機／窄平板）時，改成單欄 */
+    @media (max-width: 820px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    .contact-text h2 { font-size: 2rem; margin-bottom: 16px; }
+    .contact-text p { color: var(--text-soft); margin-bottom: 16px; }
+
+    /* 再次提醒領課程的小標籤 */
+    .reminder-badge {
+      display: inline-block;
+      background: #FBEAD9;
+      color: var(--burnt-orange);
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+    }
+
+    /* 表格卡片 */
+    .form-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+      padding: 34px;
+    }
+
+    /* 每個欄位的外層，控制上下間距 */
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--text-dark);
+    }
+    /* 輸入框與文字區的共用外觀 */
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 1rem;
+      padding: 12px 14px;
+      border: 1.5px solid #E0D6C4;
+      border-radius: 12px;
+      background: #FCFAF5;
+      color: var(--text-dark);
+    }
+    /* 點選（focus）時邊框變綠，給使用者回饋 */
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--moss-green);
+      box-shadow: 0 0 0 3px rgba(107, 142, 90, 0.18);
+    }
+    .form-group textarea {
+      resize: vertical;          /* 只允許上下拉動大小 */
+      min-height: 90px;
+    }
+
+    /* 提交按鈕：滿版寬度 */
+    .form-card .btn-primary {
+      width: 100%;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    /* 提交成功後顯示的多謝訊息（預設隱藏） */
+    .thank-you {
+      display: none;             /* 一開始藏起來，提交成功才由 JS 顯示 */
+      background: #EAF3E4;
+      border: 1.5px solid var(--moss-green);
+      color: var(--forest-green);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /*
+      ============================================================
+      8. Footer 頁尾
+      ============================================================
+    */
+    footer {
+      background-color: #26331F; /* 最深的綠棕，收尾沉穩 */
+      color: #D8D0C0;
+      text-align: center;
+      padding: 60px 24px 40px;
+    }
+    footer h3 {
+      color: #fff;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    footer .tagline {
+      color: #B9C4AC;
+      margin-bottom: 8px;
+    }
+    /* 帶信仰精神的結語 */
+    footer .faith-line {
+      color: #9FAE90;
+      font-style: italic;
+      max-width: 520px;
+      margin: 0 auto 24px;
+    }
+    /* WhatsApp 連結按鈕 */
+    .whatsapp-btn {
+      display: inline-block;
+      background: #25D366;       /* WhatsApp 官方綠 */
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 12px 26px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+      transition: transform 0.15s ease;
+    }
+    .whatsapp-btn:hover { transform: translateY(-2px); }
+
+    footer .copyright {
+      font-size: 0.85rem;
+      color: #7E8B71;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 22px;
+      margin-top: 8px;
+    }
+
+    /*
+      ============================================================
+      9. 手機版微調（讓字體在小螢幕不會太大）
+      ============================================================
+    */
+    @media (max-width: 600px) {
+      .hero { padding: 90px 0; }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1.05rem; }
+      .section-title, .contact-text h2 { font-size: 1.6rem; }
+      section { padding: 64px 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!--
+    ============================================================
+    區塊 1：HERO 區
+    ============================================================
+  -->
+  <header class="hero">
+    <div class="container">
+      <!-- 主標題 -->
+      <h1>移居英國，你不必一個人從零開始。</h1>
+      <!-- 副標題 -->
+      <p>韭菜俱樂部 The Chive Club —— 一群散居英格蘭的香港人，<br />一起種植、一起吃飯、一起在這片土地上札根。</p>
+      <!--
+        行動按鈕：
+        href="#contact" 代表點擊後會跳到下面 id 為 "contact" 的表格區。
+        因為上面 CSS 設了 scroll-behavior: smooth，所以會「平滑捲動」過去。
+      -->
+      <a href="#contact" class="btn-primary">留下 Email，免費領取 5 天種菜課程</a>
+    </div>
+  </header>
+
+  <!--
+    ============================================================
+    區塊 2：三大主軸（三張卡）
+    ============================================================
+  -->
+  <section class="pillars">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="eyebrow">我們在做什麼</span>
+        <h2 class="section-title">三件我們一起做的事</h2>
+      </div>
+      <p class="section-intro">種植從來不只是種菜，而是一種彼此連結、在異地重新扎根的方式。</p>
+
+      <div class="pillars-grid">
+        <!-- 卡片一：互助種植 -->
+        <div class="card">
+          <div class="pillar-icon">🤝</div>
+          <h3>互助種植</h3>
+          <span class="en-label">Mutual Gardening</span>
+          <p>在種植的路上彼此扶持，一起翻土、播種、分享經驗 —— 你不是一個人在種。</p>
+        </div>
+
+        <!-- 卡片二：從土地到餐桌 -->
+        <div class="card">
+          <div class="pillar-icon">🍲</div>
+          <h3>從土地到餐桌</h3>
+          <span class="en-label">Farm to Table</span>
+          <p>把收成煮成共享的餐點，讓勞動化為喜悅與感恩。</p>
+        </div>
+
+        <!-- 卡片三：知識與資源共享 -->
+        <div class="card">
+          <div class="pillar-icon">📚</div>
+          <h3>知識與資源共享</h3>
+          <span class="en-label">Sharing &amp; Learning</span>
+          <p>一起少走冤枉路，工具共享、經驗交流，鼓勵不完美的分享。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    ============================================================
+    區塊 3：會員故事 ＋ 收成照片（social proof）
+    ------------------------------------------------------------
+    👉 請把下面三張卡的照片、引言、署名，都換成真實會員的內容。
+       照片位用的是 Unsplash placeholder，換法：把 <img> 的 src 改成你的照片路徑。
+    ============================================================
+  -->
+  <section class="stories">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="eyebrow">會員故事</span>
+        <h2 class="section-title">他們，也曾是新來的</h2>
+      </div>
+      <p class="section-intro">這裏的每一份收成，背後都有一個重新開始的故事。</p>
+
+      <div class="stories-grid">
+
+        <!-- 故事卡一 -->
+        <div class="card">
+          <!-- 👉 請換成真實會員／收成照片 -->
+          <img class="story-photo" src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&w=600&q=80" alt="會員收成照片（請替換成真實照片）" />
+          <p class="story-quote">「剛到修咸頓時人生路不熟，是俱樂部的朋友帶我認識這片土地。第一次收成番茄那天，我哭了。」</p>
+          <!-- 👉 請換成真實署名 -->
+          <p class="story-author">陳太・修咸頓 Southampton</p>
+        </div>
+
+        <!-- 故事卡二 -->
+        <div class="card">
+          <!-- 👉 請換成真實會員／收成照片 -->
+          <img class="story-photo" src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=600&q=80" alt="會員收成照片（請替換成真實照片）" />
+          <p class="story-quote">「本來以為自己一定種死，結果跟著大家一步一步，居然種出一整盤生菜。原來我做得到。」</p>
+          <!-- 👉 請換成真實署名 -->
+          <p class="story-author">阿麗・曼徹斯特 Manchester</p>
+        </div>
+
+        <!-- 故事卡三 -->
+        <div class="card">
+          <!-- 👉 請換成真實會員／收成照片 -->
+          <img class="story-photo" src="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&w=600&q=80" alt="會員收成照片（請替換成真實照片）" />
+          <p class="story-quote">「最珍貴的不是那些菜，而是一班一起吃飯、講廣東話、互相照應的朋友。這裏有家的感覺。」</p>
+          <!-- 👉 請換成真實署名 -->
+          <p class="story-author">Kelvin・伯明翰 Birmingham</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!--
+    ============================================================
+    區塊 4：免費 5 天 Email 課程（留 Email 的誘因）
+    ============================================================
+  -->
+  <section class="course">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="eyebrow">免費禮物</span>
+        <h2 class="section-title">新手也種得起：免費 5 天 Email 種菜課程</h2>
+      </div>
+      <p class="section-intro">
+        一連五天，用 Email 手把手教你從零開始，種出你的第一盤沙律菜（Cut-and-Come-Again 生菜）——
+        夏末最容易成功、最快收成的蔬菜。留下 Email 即可免費收到。
+      </p>
+
+      <!-- 課程重點清單（4 個 bullet） -->
+      <ul class="course-benefits">
+        <li>如何挑選種子與正確播種，第一步就走對</li>
+        <li>日常澆水與照顧的簡單訣竅，忙也顧得來</li>
+        <li>短短幾天內，親眼看到種子發芽的喜悅</li>
+        <li>約四星期後，收成屬於你的第一盤沙律菜</li>
+      </ul>
+
+      <div class="btn-wrap">
+        <!-- 一樣連到下面的表格 -->
+        <a href="#contact" class="btn-primary">好，我要免費領取課程</a>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    ============================================================
+    區塊 5：聯絡表 / Email 表格
+    ------------------------------------------------------------
+    id="contact" 讓上面所有按鈕都能捲動到這裏。
+    ============================================================
+  -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-layout">
+
+        <!-- 左欄：文字說明 -->
+        <div class="contact-text">
+          <span class="eyebrow">加入我們</span>
+          <h2>準備好，一起把手弄髒了嗎？</h2>
+          <p>留下你的聯絡方式，我們會盡快邀請你加入韭菜俱樂部，並把免費 5 天種菜課程送到你的信箱。</p>
+          <span class="reminder-badge">📩 填表即免費領取 5 天種菜課程</span>
+        </div>
+
+        <!-- 右欄：表格 -->
+        <div class="form-card">
+          <!--
+            👉👉👉 如何啟用這個表格（免費，約 3 分鐘）👈👈👈
+
+            這個表格用 Formspree（免費表單服務）來收集 Email，
+            你不需要自己寫任何後端程式。步驟：
+
+            1. 用瀏覽器打開 https://formspree.io ，用你的 Email 免費註冊。
+            2. 登入後按「+ New Form」建立一個新表單，
+               並填上你要收信的 Email（例如 ambrose.cheng.cpa@gmail.com）。
+            3. Formspree 會給你一條專屬網址，長得像：
+                  https://formspree.io/f/xxxxxxx
+               （xxxxxxx 是你的表單 ID）
+            4. 把下面 <form> 標籤裏 action="..." 中的
+                  https://formspree.io/f/your-id
+               整段換成你自己那條網址，儲存，完成！
+
+            之後每當有人填表，你就會收到一封 Email 通知。
+          -->
+          <form id="signup-form"
+                action="https://formspree.io/f/your-id"
+                method="POST">
+
+            <!-- 稱呼（必填） -->
+            <div class="form-group">
+              <label for="name">稱呼 Name</label>
+              <input type="text" id="name" name="name" placeholder="例：陳先生 / Ambrose" required />
+            </div>
+
+            <!-- Email（必填） -->
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+            </div>
+
+            <!-- 所在城市（選填） -->
+            <div class="form-group">
+              <label for="city">所在城市 City（選填）</label>
+              <input type="text" id="city" name="city" placeholder="例：修咸頓、曼徹斯特、伯明翰、諾定咸…" />
+            </div>
+
+            <!-- 想說的話（選填） -->
+            <div class="form-group">
+              <label for="message">想說的話 Message（選填）</label>
+              <textarea id="message" name="message" placeholder="想種什麼？有什麼想問我們嗎？"></textarea>
+            </div>
+
+            <!-- 提交按鈕 -->
+            <button type="submit" class="btn-primary">加入韭菜俱樂部，開始種植！</button>
+          </form>
+
+          <!-- 提交成功後才會出現的多謝訊息（由下面的 JavaScript 控制顯示） -->
+          <div id="thank-you" class="thank-you">
+            🌿 多謝你！我們已經收到你的資料，<br />
+            5 天種菜課程很快會送到你的信箱，記得留意（也看看垃圾郵件夾）。
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!--
+    ============================================================
+    區塊 6：Footer 頁尾
+    ============================================================
+  -->
+  <footer>
+    <h3>韭菜俱樂部 The Chive Club</h3>
+    <p class="tagline">一起種植、一起吃飯、一起在這片土地上札根。</p>
+    <!-- 帶信仰精神的結語 -->
+    <p class="faith-line">願我們一同撒種、一同流淚耕耘，也一同歡呼收割。</p>
+
+    <!--
+      👉 請把下面的 WhatsApp 連結換成你真正的群組邀請連結。
+         做法：打開 WhatsApp 群組 → 群組資料 → 「邀請連結」→ 複製連結，
+         再把 href="..." 裏的 https://chat.whatsapp.com/your-invite-link 換掉。
+    -->
+    <a class="whatsapp-btn" href="https://chat.whatsapp.com/your-invite-link" target="_blank" rel="noopener">
+      💬 加入我們的 WhatsApp 群組
+    </a>
+
+    <!-- 版權年份 -->
+    <p class="copyright">© 2026 韭菜俱樂部 The Chive Club．用心種植，用愛連結。</p>
+  </footer>
+
+  <!--
+    ============================================================
+    JavaScript（少量）
+    ------------------------------------------------------------
+    這段只做一件事：
+    當使用者按下提交後，透過 Formspree 在背景送出資料（不用跳轉頁面），
+    成功的話就把表格收起、顯示多謝訊息。
+    ============================================================
+  -->
+  <script>
+    // 先找到頁面上的「表格」和「多謝訊息」這兩個元素
+    const form = document.getElementById('signup-form');
+    const thankYou = document.getElementById('thank-you');
+
+    // 監聽表格的「submit（提交）」事件
+    form.addEventListener('submit', async function (event) {
+      // 阻止瀏覽器預設行為（預設會整頁跳轉），改由我們自己用 JS 處理
+      event.preventDefault();
+
+      try {
+        // 把表格內容打包，用 fetch 送到 Formspree
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' } // 叫 Formspree 回傳 JSON 而非跳轉
+        });
+
+        if (response.ok) {
+          // 成功：收起表格，顯示多謝訊息
+          form.style.display = 'none';
+          thankYou.style.display = 'block';
+        } else {
+          // Formspree 有回應但出錯（例如尚未換上你的表單 ID）
+          alert('提交時出了點問題，請確認表格設定，或稍後再試一次。');
+        }
+      } catch (error) {
+        // 完全連不上（例如未上網，或還沒填好 Formspree 的網址）
+        alert('未能送出，請檢查網絡連線，或稍後再試一次。');
+      }
+    });
+  </script>
+
+</body>
+</html>
