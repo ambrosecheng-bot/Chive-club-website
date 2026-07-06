@@ -90,12 +90,12 @@
     .container {
       max-width: 1080px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 20px;          /* 手機先用較窄的兩側留白 */
     }
 
-    /* 每個大區塊上下的留白（大量留白，呼吸感） */
+    /* 每個大區塊上下的留白（手機先給較小的值，桌面版再加大） */
     section {
-      padding: 88px 0;
+      padding: 56px 0;
     }
 
     /* 區塊小標籤（綠色小字，放在大標題上方） */
@@ -108,9 +108,9 @@
       margin-bottom: 12px;
     }
 
-    /* 區塊主標題的共用樣式 */
+    /* 區塊主標題的共用樣式（手機先用較小字級） */
     .section-title {
-      font-size: 2rem;
+      font-size: 1.6rem;
       margin-bottom: 16px;
     }
 
@@ -118,9 +118,9 @@
     .section-intro {
       color: var(--text-soft);
       max-width: 640px;
-      margin: 0 auto 48px;
+      margin: 0 auto 40px;
       text-align: center;
-      font-size: 1.05rem;
+      font-size: 1rem;
     }
 
     /*
@@ -145,20 +145,20 @@
       background-position: center;
       color: #fff;
       text-align: center;
-      padding: 130px 0;
+      padding: 84px 0;            /* 手機先用較矮的高度 */
     }
 
     .hero h1 {
       color: #fff;                /* Hero 標題用白色 */
-      font-size: 2.7rem;
-      margin-bottom: 20px;
+      font-size: 1.9rem;          /* 手機先用較小標題 */
+      margin-bottom: 18px;
       text-shadow: 0 2px 12px rgba(0,0,0,0.35);
     }
 
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1.05rem;
       max-width: 680px;
-      margin: 0 auto 36px;
+      margin: 0 auto 32px;
       color: #F3EEE4;
     }
 
@@ -321,25 +321,18 @@
       ============================================================
     */
     /*
-      這區分成左右兩欄：
-      左邊是文字說明，右邊是表格。
-      手機上會自動疊成上下一欄。
+      這區分成文字說明與表格兩部分。
+      Mobile-first：手機上預設「上下疊成單欄」，
+      到桌面版（下面的 min-width 查詢）才變成左右兩欄。
     */
     .contact-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
+      grid-template-columns: 1fr;   /* 手機：單欄 */
+      gap: 32px;
       align-items: center;
     }
-    /* 螢幕小於 820px（手機／窄平板）時，改成單欄 */
-    @media (max-width: 820px) {
-      .contact-layout {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-    }
 
-    .contact-text h2 { font-size: 2rem; margin-bottom: 16px; }
+    .contact-text h2 { font-size: 1.6rem; margin-bottom: 16px; }
     .contact-text p { color: var(--text-soft); margin-bottom: 16px; }
 
     /* 再次提醒領課程的小標籤 */
@@ -465,15 +458,41 @@
 
     /*
       ============================================================
-      9. 手機版微調（讓字體在小螢幕不會太大）
+      9. 桌面版加強（Mobile-first 的重點）
+      ------------------------------------------------------------
+      上面所有樣式都是「以手機為準」寫的。
+      下面用 min-width 媒體查詢，當螢幕變寬時「逐步加大」版面：
+        - 640px 以上 → 平板／大手機：字級、留白稍為加大
+        - 900px 以上 → 桌面：完整的大標題、兩欄排版
+      這就是 mobile-first：先寫小螢幕，再往上疊加。
       ============================================================
     */
-    @media (max-width: 600px) {
-      .hero { padding: 90px 0; }
-      .hero h1 { font-size: 2rem; }
-      .hero p { font-size: 1.05rem; }
-      .section-title, .contact-text h2 { font-size: 1.6rem; }
-      section { padding: 64px 0; }
+
+    /* --- 平板／大手機（≥ 640px） --- */
+    @media (min-width: 640px) {
+      .container      { padding: 0 24px; }
+      section         { padding: 72px 0; }
+      .section-title  { font-size: 1.8rem; }
+      .section-intro  { font-size: 1.05rem; margin-bottom: 44px; }
+
+      .hero           { padding: 110px 0; }
+      .hero h1        { font-size: 2.3rem; }
+      .hero p         { font-size: 1.15rem; }
+    }
+
+    /* --- 桌面（≥ 900px） --- */
+    @media (min-width: 900px) {
+      section         { padding: 88px 0; }
+      .section-title  { font-size: 2rem; }
+      .section-intro  { margin-bottom: 48px; }
+
+      .hero           { padding: 130px 0; }
+      .hero h1        { font-size: 2.7rem; }
+      .hero p         { font-size: 1.2rem; }
+
+      /* 聯絡區在桌面版變成左右兩欄（文字｜表格） */
+      .contact-layout   { grid-template-columns: 1fr 1fr; gap: 48px; }
+      .contact-text h2  { font-size: 2rem; }
     }
   </style>
 </head>
