@@ -454,6 +454,90 @@
 
     /*
       ============================================================
+      7.5 社群反思文章區（森林浴心語）
+      ------------------------------------------------------------
+      沿用全站的大地色系、圓角卡片與柔和陰影。
+      這區用一張大卡片盛載一篇文章，並有「展開閱讀全文」的功能。
+      ============================================================
+    */
+    .reflection {
+      background-color: #F3ECE0; /* 淺棕底，與前後區塊區隔 */
+    }
+
+    /* 承載整篇文章的白色大卡片 */
+    .reflection-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 34px 26px;
+    }
+
+    /* 突出的 pull quote：大字、有色左邊框 */
+    .pull-quote {
+      border-left: 5px solid var(--burnt-orange);
+      background: #FBEAD9;
+      border-radius: 0 14px 14px 0;
+      padding: 20px 24px;
+      margin: 26px 0;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.7;
+      color: var(--forest-green);
+    }
+
+    /* 文章正文小標題 */
+    .reflection-article h3 {
+      font-size: 1.3rem;
+      margin-bottom: 18px;
+    }
+
+    /* 文章段落 */
+    .reflection-article p {
+      color: var(--text-dark);
+      margin-bottom: 18px;
+    }
+
+    /* 「展開後才顯示」的段落容器：預設收合 */
+    .reflection-more {
+      display: none;
+    }
+    .reflection-more.is-open {
+      display: block;
+    }
+
+    /* 展開／收合按鈕 */
+    .reflection-toggle {
+      display: inline-block;
+      background: transparent;
+      color: var(--burnt-orange);
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      border: 1.5px solid var(--burnt-orange);
+      border-radius: 50px;
+      padding: 10px 26px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .reflection-toggle:hover {
+      background: var(--burnt-orange);
+      color: #fff;
+    }
+
+    /* 文章末尾署名：字體較小、柔和 */
+    .reflection-signature {
+      margin-top: 26px;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      font-style: italic;
+      text-align: right;
+    }
+
+    /*
+      ============================================================
       8. Footer 頁尾
       ============================================================
     */
@@ -538,6 +622,11 @@
       /* 聯絡區在桌面版變成左右兩欄（文字｜表格） */
       .contact-layout   { grid-template-columns: 1fr 1fr; gap: 48px; }
       .contact-text h2  { font-size: 2rem; }
+
+      /* 反思文章區在桌面版：卡片留白加大、pull quote 字級加大 */
+      .reflection-card  { padding: 48px 54px; }
+      .pull-quote       { font-size: 1.45rem; padding: 24px 30px; }
+      .reflection-article h3 { font-size: 1.5rem; }
     }
   </style>
 </head>
@@ -699,6 +788,69 @@
       <div class="event-message">
         <p class="story-quote">「感謝『韮菜俱樂部』選擇 Cafe Lamma'z 作為今次聚會的場地！很高興能夠接待大家，與各位一同分享美食和歡樂時光。感謝大家的支持和蒞臨，希望大家都度過了一個愉快的聚會，期待不久將來再次歡迎大家到來！🥰☕️🍰」</p>
         <p class="event-meta">Cafe Lamma'z・Fareham ・ 2026 年 6 月 18 日 Farm to Table 聚會</p>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    ============================================================
+    區塊 3.75：社群反思文章（森林浴心語）
+    ------------------------------------------------------------
+    刊登森林浴帶領者 Man Wong 的一篇心語。
+    預設只顯示引言、pull quote 與第一段，按「展開閱讀全文」才展開餘下段落。
+    ============================================================
+  -->
+  <section class="reflection">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="eyebrow">社群心語</span>
+        <h2 class="section-title">森林浴・在異地，一起慢慢走</h2>
+      </div>
+      <p class="section-intro">
+        今年六月，我們一起走進森林——在異地的土地上，彼此同行、靜心呼吸。以下是森林浴帶領者 Man Wong 的一篇心語，寫給每一位在移居路上努力紮根的你。
+      </p>
+
+      <div class="reflection-card">
+        <!-- 突出的 pull quote：大字、有色左邊框 -->
+        <blockquote class="pull-quote">
+          黑夜再長，四季終會輪轉；只要願意慢慢走下去，總會迎來屬於自己的春天。
+        </blockquote>
+
+        <article class="reflection-article">
+          <h3>「東西方正向思維」的人生智慧</h3>
+
+          <!-- 第一段：預設就顯示 -->
+          <p>六月「森林浴」舉辦工作坊和外出活動，參加者的真情分享與氣氛情境，的確令人動容；人在異地，能夠見證港人之間如此互相扶持與同行，實屬難得。</p>
+
+          <!--
+            其餘段落：預設收合（display:none），
+            按下「展開閱讀全文」後由 JavaScript 加上 .is-open 才顯示。
+          -->
+          <div class="reflection-more" id="reflection-more">
+            <p>然而，筆者深信參加者在英國的逆境並非孤例。很多家庭移民海外後，面對離鄉和漂洋的生活，在身、心、社、靈各方面，都需要適應全新的環境與文化。當中的壓力往往十分沉重，亦容易衍生情緒、心理適應等問題；若再加上與家人之間出現磨擦或關係困難，個人的壓力指數更可能瞬間爆表。</p>
+
+            <p>不過，壓力其實同時包含「客觀」與「主觀」兩個層面。因此，我們更需要學習保持一種「境不轉而心境轉」的正向心態——很多客觀環境，未必是我們能即時改變的；但對事情的主觀感受，卻可以透過正念與感恩，慢慢調節自己的心理狀態。</p>
+
+            <p>這亦讓筆者想起西方心理學中「半杯水」的比喻：同樣只有半杯水，有人看到的是「不滿只剩半杯」，有人看到的卻是「幸好尚有半杯」；關鍵往往在於我們選擇以正面還是負面的角度去理解事情。</p>
+
+            <p>若從東方正念思想來看，二千多年前老子《道德經》推崇的理念，是以大自然為師，順應四時節氣，與天地規律同行。簡而言之，人若能順勢而行、尊重自然節奏，往往能事半功倍。正如冬季休耕、春季播種，各有其時。引申到人生低潮時，也許更需要學習靜心、正念和感恩面對，不卑不亢，接受生命有高低起伏。若一味強行逆勢而行，過份相信自己，有時反而容易令自己更加疲憊與痛苦。</p>
+
+            <p>再者，據聖經新約《使徒行傳》20:35 所言：「施比受更為有福」，祝願我們在異地生活之中，享受「福者的榮耀」——不要吝嗇自己所擁有的愛與包容，學懂彼此體諒，好好愛惜家人、身邊人與朋友；因為很多時候，一份理解、一句關心、一點同行的力量，已足以成為別人低谷中的安慰與支持。</p>
+
+            <p>最後，僅祝願我們在異地生活的路上，大家都能多一點彼此理解、多一點同行支持；在艱難與低谷之中，仍然保留一份溫柔與正面盼望。畢竟，黑夜再長，四季終會輪轉；只要願意慢慢走下去，總會迎來屬於自己的春天。</p>
+
+            <p>共勉之</p>
+          </div>
+
+          <!-- 展開／收合按鈕（由下方 JavaScript 控制） -->
+          <button type="button" class="reflection-toggle" id="reflection-toggle"
+                  aria-expanded="false" aria-controls="reflection-more">
+            展開閱讀全文 ▾
+          </button>
+
+          <!-- 文章末尾署名（字體較小、柔和） -->
+          <p class="reflection-signature">文：Man Wong（森林浴帶領者）· 2026 年初夏</p>
+        </article>
       </div>
     </div>
   </section>
@@ -880,6 +1032,22 @@
         alert('未能送出，請檢查網絡連線，或稍後再試一次。');
       }
     });
+
+    /*
+      社群反思文章的「展開／收合」功能：
+      按一下按鈕，就把餘下段落（#reflection-more）的 .is-open 開關切換，
+      同時更新按鈕文字與 aria-expanded（無障礙屬性）。
+    */
+    const reflectionToggle = document.getElementById('reflection-toggle');
+    const reflectionMore = document.getElementById('reflection-more');
+
+    if (reflectionToggle && reflectionMore) {
+      reflectionToggle.addEventListener('click', function () {
+        const isOpen = reflectionMore.classList.toggle('is-open');
+        reflectionToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        reflectionToggle.textContent = isOpen ? '收合 ▴' : '展開閱讀全文 ▾';
+      });
+    }
   </script>
 
 </body>
