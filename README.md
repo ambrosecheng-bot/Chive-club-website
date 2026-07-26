@@ -78,6 +78,15 @@ Chive-club-website/
 └── README.md    # 本說明文件
 ```
 
+## Adding Email Templates
+The website uses [EmailJS](https://dashboard.emailjs.com/) to send emails.
+
+To create a new email template:
+1. Sign in with chivesclub2024@gmail.com
+2. In **Email Templates**, click **Create New Template**
+3. Choose a template and scroll down, click **Create Template**
+4. Edit the email
+
 ## 📜 版權
 
 © 2026 韭菜俱樂部 The Chive Club．用心種植，用愛連結。
