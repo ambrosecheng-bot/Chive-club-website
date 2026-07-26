@@ -1,3 +1,5 @@
+import { sendEmail } from './sendEmail.js';
+
 // 先找到頁面上的「表格」和「多謝訊息」這兩個元素
 const form = document.getElementById('signup-form');
 const thankYou = document.getElementById('thank-you');
@@ -9,9 +11,10 @@ form.addEventListener('submit', async function (event) {
 
   try {
     // 把表格內容打包，用 fetch 送到 Formspree
+    const data = new FormData(form);
     const response = await fetch(form.action, {
       method: 'POST',
-      body: new FormData(form),
+      body: data,
       headers: { 'Accept': 'application/json' } // 叫 Formspree 回傳 JSON 而非跳轉
     });
 
@@ -19,6 +22,9 @@ form.addEventListener('submit', async function (event) {
       // 成功：收起表格，顯示多謝訊息
       form.style.display = 'none';
       thankYou.style.display = 'block';
+
+      const email = data.get(email);
+      sendEmail(email);
     } else {
       // Formspree 有回應但出錯（例如尚未換上你的表單 ID）
       alert('提交時出了點問題，請確認表格設定，或稍後再試一次。');
