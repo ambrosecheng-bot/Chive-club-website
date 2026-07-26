@@ -15,7 +15,6 @@ export function sendEmail(userEmail) {
     emailjs.send(serviceID, templateID, templateParams)
         .then((response) => {
             console.log("Email sent successfully!", response.status, response.text);
-            alert("Success! Check your inbox.");
         })
         .catch((error) => {
             console.error("Failed to send email:", error);
