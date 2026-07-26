@@ -23,7 +23,7 @@ form.addEventListener('submit', async function (event) {
       form.style.display = 'none';
       thankYou.style.display = 'block';
 
-      const email = data.get(email);
+      const email = data.get("email");
       sendEmail(email);
     } else {
       // Formspree 有回應但出錯（例如尚未換上你的表單 ID）
