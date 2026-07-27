@@ -1,4 +1,5 @@
 import { sendSignupEmail } from './sendEmail.js';
+import { addSignupData } from './firebase.js';
 
 // 先找到頁面上的「表格」和「多謝訊息」這兩個元素
 const form = document.getElementById('signup-form');
@@ -25,6 +26,7 @@ form.addEventListener('submit', async function (event) {
 
       const email = data.get("email");
       sendSignupEmail(email);
+      addSignupData(data);
     } else {
       // Formspree 有回應但出錯（例如尚未換上你的表單 ID）
       alert('提交時出了點問題，請確認表格設定，或稍後再試一次。');
