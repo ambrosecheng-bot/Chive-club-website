@@ -22,13 +22,13 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-async function addSignupData(name, email, city, message) {
+async function addSignupData(data) {
     try {
         const docRef = await addDoc(collection(db, "signup"), {
-            name: "Hello World",
-            email: email,
-            city: city,
-            message: message,
+            name: data.get("name"),
+            email: data.get("email"),
+            city: data.get("city"),
+            message: data.get("message"),
             time: serverTimestamp()
         });
         console.log("Saved successfully! ID:", docRef.id);
