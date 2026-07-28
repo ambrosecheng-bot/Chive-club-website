@@ -1,8 +1,8 @@
 // Initialize EmailJS with your Public Key (Get this from your EmailJS Account Dashboard)
 emailjs.init("XKOeiuX5zHgQT4aqf");
 
-export function sendSignupEmail(userEmail) {
-  // These IDs come from your EmailJS dashboard after setup
+function sendSignupEmail(userEmail) {
+    // These IDs come from your EmailJS dashboard after setup
     const serviceID = "service_55s2sal";
     const templateID = "template_v48jvlt";
 
@@ -21,3 +21,5 @@ export function sendSignupEmail(userEmail) {
             alert("Error sending email. Please try again.");
         });
 }
+
+export { sendSignupEmail };
