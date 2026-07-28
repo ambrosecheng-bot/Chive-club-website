@@ -26,7 +26,7 @@ function sendEmail(userEmail) {
 }
 
 function sendDailyEmail() {
-  const allData = getAllSignupData;
+  const allData = getAllSignupData();
   allData.forEach(item => {
     sendEmail(item.email);
   });
