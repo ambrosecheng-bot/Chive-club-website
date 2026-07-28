@@ -21,12 +21,11 @@ function sendEmail(userEmail) {
         })
         .catch((error) => {
             console.error("Failed to send email:", error);
-            alert("Error sending email. Please try again.");
         });
 }
 
-function sendDailyEmail() {
-  const allData = getAllSignupData();
+async function sendDailyEmail() {
+  const allData = await() getAllSignupData();
   allData.forEach(item => {
     sendEmail(item.email);
   });
