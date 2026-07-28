@@ -37,4 +37,20 @@ async function addSignupData(data) {
     }
 }
 
+async function getAllSignupData() {
+  // 2. Reference the targeted collection
+  const colRef = collection(db, "signup");
+
+  // 3. Fetch the collection snapshot
+  const querySnapshot = await getDocs(colRef);
+
+  // 4. Map or loop through the documents
+  const allDocs = querySnapshot.docs.map(doc => ({
+    id: doc.id,         // The document ID string
+    ...doc.data()       // The document fields object
+  }));
+
+  return allDocs;
+}
+
 export { addSignupData };
