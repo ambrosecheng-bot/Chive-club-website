@@ -25,5 +25,8 @@ jobs:
             npm install
           fi
 
+      - name: Install @emailjs/nodejs
+        run: npm install @emailjs/nodejs
+        
       - name: Execute JavaScript file
         run: node --experimental-network-imports daily-run.js
