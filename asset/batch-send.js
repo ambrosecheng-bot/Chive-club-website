@@ -2,7 +2,8 @@ import emailjs from '@emailjs/nodejs';
 import { getAllSignupData } from './firebase.js';
 
 // Initialize EmailJS with your Public Key (Get this from your EmailJS Account Dashboard)
-const PUBLIC_KEY = "XKOeiuX5zHgQT4aqf"
+const PUBLIC_KEY = "XKOeiuX5zHgQT4aqf";
+const PRIVATE_KEY = "m4Qc40mB5N4DMRJhGUSxS";
 emailjs.init(PUBLIC_KEY);
 
 function sendEmail(userEmail) {
@@ -16,7 +17,7 @@ function sendEmail(userEmail) {
     };
 
     // Trigger the email sending process
-    emailjs.send(serviceID, templateID, templateParams, { publicKey: PUBLIC_KEY })
+    emailjs.send(serviceID, templateID, templateParams, { publicKey: PUBLIC_KEY, privateKey: PRIVATE_KEY })
         .then((response) => {
             console.log("Email sent successfully!", response.status, response.text);
         })
