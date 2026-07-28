@@ -1,5 +1,3 @@
-import emailjs from '@emailjs/nodejs';
-
 // Initialize EmailJS with your Public Key (Get this from your EmailJS Account Dashboard)
 emailjs.init("XKOeiuX5zHgQT4aqf");
 
