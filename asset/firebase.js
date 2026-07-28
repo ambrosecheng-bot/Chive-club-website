@@ -29,7 +29,7 @@ async function addSignupData(data) {
             email: data.get("email"),
             city: data.get("city"),
             message: data.get("message"),
-            time: serverTimestamp()
+            count: 0
         });
         console.log("Saved successfully! ID:", docRef.id);
     } catch (error) {
