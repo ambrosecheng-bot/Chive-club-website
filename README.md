@@ -90,3 +90,8 @@ To create a new email template:
 ## 📜 版權
 
 © 2026 韭菜俱樂部 The Chive Club．用心種植，用愛連結。
+
+## TODO
+1. Put public and private keys of EmailJS to env file.
+2. Write email templates.
+3. Implement batch-send.js, sending email five times then stop.
