@@ -4,7 +4,10 @@ import { getAllSignupData } from './firebase.js';
 // Initialize EmailJS with your Public Key (Get this from your EmailJS Account Dashboard)
 const PUBLIC_KEY = "XKOeiuX5zHgQT4aqf";
 const PRIVATE_KEY = "m4Qc40mB5N4DMRJhGUSxS";
-emailjs.init(PUBLIC_KEY);
+emailjs.init({
+    publicKey: PUBLIC_KEY,
+    privateKey: PRIVATE_KEY
+});
 
 function sendEmail(userEmail) {
     // These IDs come from your EmailJS dashboard after setup
