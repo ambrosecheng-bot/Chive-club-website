@@ -26,4 +26,4 @@ jobs:
           fi
 
       - name: Execute JavaScript file
-        run: node daily-run.js
+        run: node --experimental-network-imports daily-run.js
