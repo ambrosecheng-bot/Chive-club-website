@@ -26,4 +26,4 @@ jobs:
           fi
 
       - name: Execute JavaScript file
-        run: node daily-email.js
+        run: node daily-run.js
