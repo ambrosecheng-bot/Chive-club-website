@@ -25,7 +25,7 @@ function sendEmail(userEmail) {
 }
 
 async function sendDailyEmail() {
-  const allData = await() getAllSignupData();
+  const allData = await getAllSignupData();
   allData.forEach(item => {
     sendEmail(item.email);
   });
