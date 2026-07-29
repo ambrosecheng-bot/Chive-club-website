@@ -1,6 +1,6 @@
 import { sendSignupEmail } from './sendEmail.js';
 import { addSignupData, getAllSignupData, db } from './firebase.js';
-import { collection, query, where, limit, getDocs } from "firebase/firestore";
+import { collection, query, where, limit, getDocs } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 // 先找到頁面上的「表格」和「多謝訊息」這兩個元素
 const form = document.getElementById('signup-form');
