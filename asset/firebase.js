@@ -55,7 +55,8 @@ async function getAllSignupData() {
 async function updateCount(userData, countPara) {
   const docRef = doc(db, "signup", userData.id)
   await updateDoc(docRef, {
-      count: countPara++
+      //count: countPara++
+      count: 123
     });
 }
 
