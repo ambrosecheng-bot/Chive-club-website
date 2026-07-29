@@ -52,7 +52,7 @@ async function sendDailyEmail() {
   const allData = await getAllSignupData();
   allData.forEach(item => {
     sendEmail(item.email, item.count);
-    updateCount(item, item.count);
+    if (item.count < 5) updateCount(item, item.count);
   });
 }
 
