@@ -1,5 +1,5 @@
 import { sendSignupEmail } from './sendEmail.js';
-import { addSignupData } from './firebase.js';
+import { addSignupData, getAllSignupData } from './firebase.js';
 
 // 先找到頁面上的「表格」和「多謝訊息」這兩個元素
 const form = document.getElementById('signup-form');
@@ -19,12 +19,23 @@ form.addEventListener('submit', async function (event) {
       headers: { 'Accept': 'application/json' } // 叫 Formspree 回傳 JSON 而非跳轉
     });
 
-    if (response.ok) {
+    const email = data.get("email");
+    let emailExists = false;
+    const allData = await getAllSignupData();
+    allData.forEach(item => {
+      if (item.email == email) {
+        emailExists = true;
+      }
+    });
+
+    if (emailExists){
+      alert('Email already registered, please try a different one.')
+    } else if (response.ok) {
       // 成功：收起表格，顯示多謝訊息
       form.style.display = 'none';
       thankYou.style.display = 'block';
 
-      const email = data.get("email");
+      //const email = data.get("email");
       sendSignupEmail(email);
       addSignupData(data);
     } else {
