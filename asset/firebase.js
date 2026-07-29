@@ -58,4 +58,4 @@ async function updateCount(userData, countPara) {
     });
 }
 
-export { addSignupData, getAllSignupData, db };
+export { addSignupData, getAllSignupData, updateCount, db };
