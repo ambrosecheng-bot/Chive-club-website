@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, serverTimestamp, updateDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -49,6 +49,13 @@ async function getAllSignupData() {
   }));
 
   return allDocs;
+}
+
+// Update count
+async function updateCount(userData, countPara) {
+  await updateDoc(userData, {
+      count: increment(countPara)
+    });
 }
 
 export { addSignupData, getAllSignupData, db };
