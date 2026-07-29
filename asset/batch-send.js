@@ -12,9 +12,10 @@ emailjs.init({
 function sendEmail(userEmail, count) {
     // These IDs come from your EmailJS dashboard after setup
     const serviceID = /*"service_55s2sal"*/ "service_1wh8ska"; //switched to sunnyyanlongmok's emailjs
+	var templateID = "Nothing";
     switch (count){
-			case 0: const templateID = "template_c34qvk2"; break;
-			case 1: const templateID = "template_hzsat8l"; break;
+			case 0: templateID = "template_c34qvk2"; break;
+			case 1: templateID = "template_hzsat8l"; break;
 			//case 2: const templateID = "3"; break;
 			//case 3: const templateID = "4"; break;
 			//case 4: const templateID = "5"; break;
