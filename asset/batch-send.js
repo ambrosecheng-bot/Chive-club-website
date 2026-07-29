@@ -57,7 +57,7 @@ async function sendDailyEmail() {
 	try {
     	if (item.count < 5) {
 			updateCount(item, item.count);
-    		console.log("Count successfully incremented! ", item.count);
+    		console.log("Count increment code executed without runtime errors!");
 		}
 	} 
 	catch (error) {
