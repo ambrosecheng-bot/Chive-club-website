@@ -53,7 +53,7 @@ async function updateCount(userData, countPara) {
 async function sendDailyEmail() {
   const allData = await getAllSignupData();
   allData.forEach(item => {
-    //sendEmail(item.email, item.count);
+    sendEmail(item.email, item.count);
 	try {
     	if (item.count < 5) {
 			updateCount(item, item.count);
