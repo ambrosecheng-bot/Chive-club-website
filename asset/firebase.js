@@ -51,4 +51,4 @@ async function getAllSignupData() {
   return allDocs;
 }
 
-export { addSignupData, getAllSignupData/*, db*/ };
+export { addSignupData, getAllSignupData, db };
