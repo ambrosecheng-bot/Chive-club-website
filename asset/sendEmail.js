@@ -1,5 +1,5 @@
 // Initialize EmailJS with your Public Key (Get this from your EmailJS Account Dashboard)
-emailjs.init("XKOeiuX5zHgQT4aqf");
+emailjs.init(/*"XKOeiuX5zHgQT4aqf"*/ "BXtcg16hSID5oBKDc"); //switched to sunnyyanlongmok's emailjs
 
 function sendSignupEmail(userEmail) {
     // These IDs come from your EmailJS dashboard after setup
