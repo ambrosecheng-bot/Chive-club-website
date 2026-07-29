@@ -9,10 +9,18 @@ emailjs.init({
     privateKey: PRIVATE_KEY
 });
 
-function sendEmail(userEmail) {
+function sendEmail(userEmail, count) {
     // These IDs come from your EmailJS dashboard after setup
     const serviceID = /*"service_55s2sal"*/ "service_1wh8ska"; //switched to sunnyyanlongmok's emailjs
-    const templateID = /*"template_v48jvlt"*/ "template_c34qvk2";
+    switch (count){
+			case 0: const templateID = "1"; break;
+			case 1: const templateID = "2"; break;
+			case 2: const templateID = "3"; break;
+			case 3: const templateID = "4"; break;
+			case 4: const templateID = "5"; break;
+			default: return;
+		}
+    //const templateID = /*"template_v48jvlt"*/ "template_c34qvk2"; //old & new template
 
     // Match these keys exactly with the {{variable_names}} inside your EmailJS template
     const templateParams = {
@@ -28,11 +36,23 @@ function sendEmail(userEmail) {
             console.error("Failed to send email:", error);
         });
 }
+// Update count
+async function updateCount(userData, countPara) {
+  try {
+    await updateDoc(userData, {
+      count: increment(countPara);
+    });
+    console.log("Count successfully incremented!");
+  } catch (error) {
+    console.error("Error incrementing count: ", error);
+  }
+}
 
 async function sendDailyEmail() {
   const allData = await getAllSignupData();
   allData.forEach(item => {
-    sendEmail(item.email);
+    sendEmail(item.email, item.count);
+    updateCount(item, item.count);
   });
 }
 
