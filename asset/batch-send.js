@@ -41,7 +41,7 @@ function sendEmail(userEmail, count) {
 async function updateCount(userData, countPara) {
   try {
     await updateDoc(userData, {
-      count: increment(countPara);
+      count: increment(countPara)
     });
     console.log("Count successfully incremented!");
   } catch (error) {
