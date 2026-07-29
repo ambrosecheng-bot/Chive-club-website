@@ -54,7 +54,7 @@ async function getAllSignupData() {
 // Update count
 async function updateCount(userData, countPara) {
   await updateDoc(userData, {
-      count: increment(countPara)
+      count: countPara++
     });
 }
 
