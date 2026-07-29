@@ -1,6 +1,6 @@
 import { sendSignupEmail } from './sendEmail.js';
-import { addSignupData, getAllSignupData, db } from './firebase.js';
-import { collection, query, where, limit, getDocs } from "firebase/firestore";
+import { addSignupData, getAllSignupData/*, db*/ } from './firebase.js';
+//import { collection, query, where, limit, getDocs } from "firebase/firestore";
 
 // 先找到頁面上的「表格」和「多謝訊息」這兩個元素
 const form = document.getElementById('signup-form');
@@ -21,7 +21,6 @@ form.addEventListener('submit', async function (event) {
     });
     
     const email = data.get("email").toLowerCase().trim();
-    /*
     let emailExists = false;
     const allData = await getAllSignupData();
     allData.forEach(item => {
@@ -29,12 +28,12 @@ form.addEventListener('submit', async function (event) {
         emailExists = true;
       }
     });
-*/    
-    const signupRef = collection(db, "signup"); // Make sure "signups" matches your collection name
+    /*const signupRef = collection(db, "signup"); // Make sure "signups" matches your collection name
     const q = query(signupRef, where("email", "==", email), limit(1));
     const querySnapshot = await getDocs(q);
 
     const emailExists = !querySnapshot.empty;
+    */
     
     if (emailExists){
       alert('Email already registered, please try a different one.')
