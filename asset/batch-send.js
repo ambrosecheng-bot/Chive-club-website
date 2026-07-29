@@ -1,5 +1,5 @@
 import emailjs from '@emailjs/nodejs';
-import { getAllSignupData } from './firebase.js';
+import { getAllSignupData, updateCount } from './firebase.js';
 
 // Initialize EmailJS with your Public Key (Get this from your EmailJS Account Dashboard)
 const PUBLIC_KEY = /*"XKOeiuX5zHgQT4aqf"*/ "BXtcg16hSID5oBKDc"; // switched to sunnyyanlongmok's emailjs to preserve requests (we only have 200)
@@ -37,6 +37,7 @@ function sendEmail(userEmail, count) {
             console.error("Failed to send email:", error);
         });
 }
+/*
 // Update count
 async function updateCount(userData, countPara) {
   try {
@@ -47,13 +48,22 @@ async function updateCount(userData, countPara) {
   } catch (error) {
     console.error("Error incrementing count: ", error);
   }
-}
+}*/
 
 async function sendDailyEmail() {
   const allData = await getAllSignupData();
   allData.forEach(item => {
     sendEmail(item.email, item.count);
-    if (item.count < 5) updateCount(item, item.count);
+	try {
+    	if (item.count < 5) {
+			updateCount(item, item.count);
+    		console.log("Count successfully incremented!");
+		}
+	} 
+	catch (error) {
+		console.error("Error incrementing count: ", error);
+	}
+    
   });
 }
 
