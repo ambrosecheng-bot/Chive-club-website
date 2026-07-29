@@ -22,6 +22,12 @@ form.addEventListener('submit', async function (event) {
 
     
     const email = data.get("email").toLowerCase().trim();
+    
+    const signupRef = collection(db, "signup"); 
+    const q = query(signupRef, where("email", "==", email), limit(1));
+    const querySnapshot = await getDocs(q);
+    const emailExists = !querySnapshot.empty;
+    
     /*
     let emailExists = false;
     const allData = await getAllSignupData();
@@ -31,15 +37,9 @@ form.addEventListener('submit', async function (event) {
       }
     });
     */
-    const signupRef = collection(db, "signup"); // Make sure "signups" matches your collection name
-    const q = query(signupRef, where("email", "==", email), limit(1));
-    const querySnapshot = await getDocs(q);
-
-    const emailExists = !querySnapshot.empty;
-    
 
     if (emailExists){
-      alert('Email already registered, please try a different one.')
+      alert('此電郵地址已被註冊，請使用另一個電郵地址再試一次。')
     } else if (response.ok) {
       // 成功：收起表格，顯示多謝訊息
       form.style.display = 'none';
