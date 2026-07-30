@@ -27,6 +27,9 @@ jobs:
 
       - name: Install @emailjs/nodejs
         run: npm install @emailjs/nodejs
+
+      - name: Install nodemailer
+        run: npm install nodemailer
         
       - name: Execute JavaScript file
         run: node --experimental-network-imports daily-run.js
