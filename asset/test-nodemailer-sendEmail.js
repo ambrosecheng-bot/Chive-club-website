@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-function sendSignupEmail(userEmail) {
+async function sendSignupEmail(userEmail) {
   try {
     const info = await transporter.sendMail({
       from: '"Sunny Mok" <mehavenodad@gmail.com>', // sender address
