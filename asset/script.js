@@ -1,4 +1,4 @@
-import { sendSignupEmail } from './test-nodemailer-sendEmail.js';
+import { sendSignupEmail } from './sendEmail.js';
 import { addSignupData, getAllSignupData, db } from './firebase.js';
 import { collection, query, where, limit, getDocs } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
