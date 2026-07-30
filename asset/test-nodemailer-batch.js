@@ -1,3 +1,5 @@
+import { getAllSignupData, updateCount } from './firebase.js';
+
 const nodemailer = require("nodemailer");
 
 // Create a transporter using SMTP
@@ -18,7 +20,7 @@ function sendEmail(userEmail, count){
     const mailOptions = {
       from: '"Sunny Mok" <mehavenodad@gmail.com>',
       to: userEmail,
-      subject: 'Hello from Node.js',
+      subject: 'Hello from Node.js', //need to switch count to send diff email, maybe use different function
       text: 'This email was sent using Nodemailer!',
       html: '<b>This email was sent using Nodemailer!</b>', 
     };
@@ -31,3 +33,24 @@ function sendEmail(userEmail, count){
       console.log('Email sent successfully! Message ID: ' + info.messageId);
     });
 }
+
+
+async function sendDailyEmail() {
+  const allData = await getAllSignupData();
+  allData.forEach(item => {
+    sendEmail(item.email, item.count);
+    /*
+	try {
+    	if (item.count < 5) {
+			updateCount(item, item.count);
+    	console.log("Count increment code executed without runtime errors!");
+		}
+	} 
+	catch (error) {
+		console.error("Error incrementing count: ", error);
+	}*/
+    
+  });
+}
+
+export { sendDailyEmail };
