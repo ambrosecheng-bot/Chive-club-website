@@ -1,4 +1,11 @@
+import express from 'express';
 import nodemailer from 'nodemailer';
+import cors from 'cors';
+
+const app = express();
+app.use(express.json());
+app.use(cors()); // Allows frontend browser to talk to this backend ???????????????????????
+
 
 // Create a transporter using SMTP
 const transporter = nodemailer.createTransport({
