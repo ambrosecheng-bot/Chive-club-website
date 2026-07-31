@@ -2,8 +2,8 @@ import emailjs from '@emailjs/nodejs';
 import { getAllSignupData, updateCount } from './firebase.js';
 
 // Initialize EmailJS with your Public Key (Get this from your EmailJS Account Dashboard)
-const PUBLIC_KEY = /*"XKOeiuX5zHgQT4aqf"*/ "BXtcg16hSID5oBKDc"; // switched to sunnyyanlongmok's emailjs to preserve requests (we only have 200)
-const PRIVATE_KEY = /*"m4Qc40mB5N4DMRJhGUSxS"*/ "QFcFKJH8TDFlBeD3vJT6-";
+const PUBLIC_KEY = "XKOeiuX5zHgQT4aqf" // "BXtcg16hSID5oBKDc"; //commented is sunnyyanlongmok's key
+const PRIVATE_KEY = "m4Qc40mB5N4DMRJhGUSxS" // "QFcFKJH8TDFlBeD3vJT6-";
 emailjs.init({
     publicKey: PUBLIC_KEY,
     privateKey: PRIVATE_KEY
@@ -11,14 +11,14 @@ emailjs.init({
 
 function sendEmail(userEmail, count) {
     // These IDs come from your EmailJS dashboard after setup
-    const serviceID = /*"service_55s2sal"*/ "service_1wh8ska"; //switched to sunnyyanlongmok's emailjs
+    const serviceID = "service_55s2sal" // "service_1wh8ska"; //switched to sunnyyanlongmok's emailjs
 	var templateID = "Nothing";
     switch (count){
-			case 0: templateID = "template_c34qvk2"; break;
-			case 1: templateID = "template_hzsat8l"; break;
-			//case 2: const templateID = "3"; break;
-			//case 3: const templateID = "4"; break;
-			//case 4: const templateID = "5"; break;
+			case 0: templateID = "template_ia5kmaa"; break;
+			case 1: templateID = "template_e53ugey"; break;
+			case 2: templateID = "template_2csycwb"; break;
+			case 3: templateID = "template_ahnme5f"; break;
+			case 4: templateID = "template_yumuumt"; break;
 			default: return;
 		}
     //const templateID = /*"template_v48jvlt"*/ "template_c34qvk2"; //old & new template
