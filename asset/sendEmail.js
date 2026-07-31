@@ -3,8 +3,8 @@ emailjs.init(/*"XKOeiuX5zHgQT4aqf"*/ "BXtcg16hSID5oBKDc"); //switched to sunnyya
 
 function sendSignupEmail(userEmail) {
     // These IDs come from your EmailJS dashboard after setup
-    const serviceID = /*"service_55s2sal"*/ "service_1wh8ska"; //switched to sunnyyanlongmok's emailjs (temporary)
-    const templateID = /*"template_v48jvlt"*/ "template_c34qvk2";
+    const serviceID = "service_55s2sal" // "service_1wh8ska"; //commented is sunnyyanlongmok's emailjs 
+    const templateID = "template_v48jvlt" // "template_c34qvk2";
 
     // Match these keys exactly with the {{variable_names}} inside your EmailJS template
     const templateParams = {
