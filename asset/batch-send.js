@@ -2,8 +2,8 @@ import emailjs from '@emailjs/nodejs';
 import { getAllSignupData, updateCount } from './firebase.js';
 
 // Initialize EmailJS with your Public Key (Get this from your EmailJS Account Dashboard)
-const PUBLIC_KEY = "XKOeiuX5zHgQT4aqf" // "BXtcg16hSID5oBKDc"; //commented is sunnyyanlongmok's key
-const PRIVATE_KEY = "m4Qc40mB5N4DMRJhGUSxS" // "QFcFKJH8TDFlBeD3vJT6-";
+const PUBLIC_KEY = "XKOeiuX5zHgQT4aqf"; // "BXtcg16hSID5oBKDc" //commented is sunnyyanlongmok's key
+const PRIVATE_KEY = "m4Qc40mB5N4DMRJhGUSxS"; // "QFcFKJH8TDFlBeD3vJT6-"
 emailjs.init({
     publicKey: PUBLIC_KEY,
     privateKey: PRIVATE_KEY
@@ -11,7 +11,7 @@ emailjs.init({
 
 function sendEmail(userEmail, count) {
     // These IDs come from your EmailJS dashboard after setup
-    const serviceID = "service_55s2sal" // "service_1wh8ska"; //switched to sunnyyanlongmok's emailjs
+    const serviceID = "service_55s2sal"; // "service_1wh8ska"; //switched to sunnyyanlongmok's emailjs
 	var templateID = "Nothing";
     switch (count){
 			case 0: templateID = "template_ia5kmaa"; break;
