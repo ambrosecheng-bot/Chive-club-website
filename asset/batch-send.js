@@ -14,13 +14,15 @@ function sendEmail(userEmail, count) {
     const serviceID = "service_55s2sal"; // "service_1wh8ska"; //switched to sunnyyanlongmok's emailjs
 	var templateID = "Nothing";
     switch (count){
-			case 0: templateID = "template_ia5kmaa"; break;
-			case 1: templateID = "template_e53ugey"; break;
-			case 2: templateID = "template_2csycwb"; break;
-			case 3: templateID = "template_ahnme5f"; break;
-			case 4: templateID = "template_yumuumt"; break;
-			default: return;
-		}
+		case 0: templateID = "template_ia5kmaa"; break;
+		case 1: templateID = "template_e53ugey"; break;
+		case 2: templateID = "template_2csycwb"; break;
+		case 3: templateID = "template_ahnme5f"; break;
+		case 4: templateID = "template_yumuumt"; break;
+		case 5: templateID = "template_e3hx6qv"; break;
+		case 6: templateID = "template_kccr2cu"; break;
+		default: return;
+	}
     //const templateID = /*"template_v48jvlt"*/ "template_c34qvk2"; //old & new template
 
     // Match these keys exactly with the {{variable_names}} inside your EmailJS template
